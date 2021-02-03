@@ -14,12 +14,8 @@
         <div style="text-align: center">
             <h3>Update task information</h3>
         </div>
-        <div class="col-12" style="margin-bottom: 10px">
-            <label class="form-label" style="width: inherit;">ID
-                <input type="text" class="form-control" placeholder="ID" id="id" th:field="*{id}" readonly="readonly"
-                       required>
-            </label>
-        </div>
+        <input type="text" style="visibility: hidden" class="form-control" placeholder="ID" id="id" th:field="*{id}"
+               required>
         <div class="col-12" style="margin-bottom: 10px">
             <label class="form-label" style="width: inherit;">Type
                 <select class="form-select" aria-label="Default select example" th:field="*{type}">

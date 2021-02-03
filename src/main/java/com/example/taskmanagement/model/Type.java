@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 public enum Type {
     JOB("Job"),
-    HOME("Value"),
+    HOME("Home"),
     LEARNING("Learning"),
     OTHER("Other");
 

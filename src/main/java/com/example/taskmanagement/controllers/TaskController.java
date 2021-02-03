@@ -31,7 +31,7 @@ public class TaskController {
     }
 
     @GetMapping("/new")
-    public String newTransaction(Model model) {
+    public String newTask(Model model) {
         Task task = new Task();
         model.addAttribute("task", task);
 
