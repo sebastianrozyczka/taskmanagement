@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Task Manager - TO-DO list</title>
+    <link rel="icon" href="check-calendar-icon.svg" type="image/svg">
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <style src="row-colors.css"></style>
+</head>
+<body class="bg-dark text-white" style="padding-top: 80px; margin: 30px">
+<nav class="navbar p-3 mb-2 fixed-top navbar-expand-lg navbar-dark bg-dark bg-gradient">
+    <div class="container-fluid">
+        <a class="navbar-brand">
+            <img src="check-calendar.svg" alt="" width="48" height="48">
+            Task Manager
+        </a>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">TO-DO list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="col-12" style="margin-bottom: 10px">
+    <a href="/" style="color: white; margin-right: 15px">
+        Show all
+    </a>
+    <a href="/?finished=false" style="color: white; margin-right: 15px">
+        Show to do
+    </a>
+    <a href="/?finished=true" style="color: white">
+        Show archive
+    </a>
+</div>
+<table class="table">
+    <thead class="text-white">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Type</th>
+        <th scope="col">Description</th>
+        <th scope="col">Deadline</th>
+        <th scope="col">Completion Date</th>
+        <th scope="col">Duration</th>
+        <th scope="col">Finished</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="task, iter : ${taskList}"
+        th:style="${task.finished} == true ? 'background-color: #acc6aa' : 'background-color: #e97a7a'">
+        <th scope="row" th:text="${task.id}"></th>
+        <td th:text="${task.type.value}"></td>
+        <td th:text="${task.description}"></td>
+        <td th:text="${task.deadline}"></td>
+        <td th:text="${task.completionDate}"></td>
+        <td th:text="${task.duration}"></td>
+        <td th:text="${task.finished} == true ? 'Done' : 'Undone'"></td>
+        <td>
+            <a th:href="@{'/edit/' + ${task.id}}" data-bs-toggle="tooltip"
+               data-bs-placement="top" title="Edit"><img src="edit-solid.svg" alt="" width="24"
+                                                         height="24"></a>
+            <a th:style="${task.finished} == true ? 'visibility: hidden' : 'visibility: visible'"
+               th:href="@{'/done/' + ${task.id}}" data-bs-toggle="tooltip"
+               data-bs-placement="top"
+               title="Mark as done"><img src="check-solid.svg" alt="" width="24" height="24"></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="col-12" style="margin-top: 15px; float: right; text-align: right">
+    <a th:href="@{new}" class="btn btn-primary" type="submit"
+       style="color: black; background-color: #acc6aa; border: none">
+        <img src="plus-solid.svg" alt="" width="16" height="16"> Create new task
+    </a>
+</div>
+<script src="tooltip-script.js">
+</script>
+</body>
+</html>
